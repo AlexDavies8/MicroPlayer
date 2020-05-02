@@ -1,0 +1,6 @@
+﻿NAME TEST 2
+
+NAME Test Playlist
+IMAGE D:\Documents\Homework\Art - Hot Weather\1\IMG_2304.JPG
+
+NAME Hello world

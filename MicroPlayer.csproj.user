@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="PlaybackPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PlaylistButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PlaylistPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="QueuePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PlaybackPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PlaylistButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PlaylistPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="QueuePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Embers.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Nior.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Night.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\DarkAccent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\SunsetBeach.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Light.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

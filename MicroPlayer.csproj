@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resources\playlist_default_icon.png" />
+    <None Remove="resources\playlist_mask_1.png" />
+    <None Remove="resources\playlist_mask_2.png" />
+    <None Remove="resources\track_default_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\playlist_default_icon.png" />
+    <Resource Include="resources\playlist_mask_1.png" />
+    <Resource Include="resources\playlist_mask_2.png" />
+    <Resource Include="resources\track_default_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TagLibSharp" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="resources\playlists.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="resources\themes\Embers.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Nior.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\Night.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\DarkAccent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="resources\themes\SunsetBeach.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>
