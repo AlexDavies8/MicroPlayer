@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\Sync\C#\MicroPlayer\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
@@ -20,6 +22,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="SettingsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TrackButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -58,6 +63,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TrackButton.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

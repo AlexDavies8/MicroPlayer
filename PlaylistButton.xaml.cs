@@ -22,7 +22,7 @@ namespace MicroPlayer
         public ImageSource Source
         {
             get { return GetValue(SourceProperty) as ImageSource; }
-            set { SetValue(SourceProperty, value); }
+            set { SetValue(SourceProperty, value); UpdateSource(); }
         }
 
         public static readonly DependencyProperty TextProperty =
@@ -35,11 +35,22 @@ namespace MicroPlayer
             set { SetValue(TextProperty, value); }
         }
 
+        public Button Button
+        {
+            get { return button; }
+        }
+
         public PlaylistButton()
         {
             InitializeComponent();
 
             this.DataContext = this;
+        }
+
+        void UpdateSource()
+        {
+            if (Source != null) Icon.Visibility = Visibility.Hidden;
+            else Icon.Visibility = Visibility.Visible;
         }
     }
 }

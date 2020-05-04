@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -51,19 +53,29 @@ namespace MicroPlayer
 
         void SetQueueDisplay()
         {
-            EmptyLabel.Visibility = (app.trackManager.queue.Count == 0 && app.trackManager.currentTrack == null) ? Visibility.Visible : Visibility.Collapsed;
-
             Container.Children.Clear();
 
             if (app.trackManager.currentTrack != null)
             {
-                Button currBtn = new Button() { BorderThickness = new Thickness(0), Height = 30, FontSize = 16, Margin = new Thickness(0, 5, 0, 5), Background = (Brush)FindResource("AccentBrush"), Foreground = (Brush)FindResource("FontBrush") };
-                currBtn.Click += (_a, _b) =>
+                TrackButton currBtn = new TrackButton() { Margin = new Thickness(0, 0, 0, 15), Background = (Brush)FindResource("AccentBrush"), ForegroundButton = true };
+                currBtn.Text = app.trackManager.currentTrack.title;
+                currBtn.PlayClicked += (_a, _b) =>
                 {
                     app.trackManager.audioManager.Restart();
+                    app.trackManager.Play();
                 };
-                currBtn.Content = app.trackManager.currentTrack.title;
+                currBtn.RemoveClicked += (_a, _b) =>
+                {
+                    app.trackManager.currentTrack = null;
+                    app.trackManager.NextTrack();
+                    UpdateDisplay();
+                };
                 Container.Children.Add(currBtn);
+            }
+
+            if (app.trackManager.queue.Count == 0)
+            {
+                Container.Children.Add(new Label() { FontSize = 30, Foreground = (Brush)FindResource("FontBrush"), Content = "Queue Empty", HorizontalAlignment = HorizontalAlignment.Center });
             }
 
             int i = 1;
@@ -71,13 +83,21 @@ namespace MicroPlayer
             {
                 int _i = i;
 
-                Button btn = new Button() { BorderThickness = new Thickness(0), Height = 30, FontSize = 16, Margin = new Thickness(0, 5, 0, 5), Background = (Brush)FindResource("ForegroundBrush"), Foreground = (Brush)FindResource("FontBrush") };
-                btn.Click += (_a, _b) =>
+                Thickness margin = new Thickness(0, 5, 0, 5);
+                if (i == app.trackManager.queue.Count) margin = new Thickness(0, 5, 0, 0);
+
+                TrackButton btn = new TrackButton() { Margin = margin };
+                btn.PlayClicked += (_a, _b) =>
                 {
                     app.trackManager.JumpQueue(_i);
                     UpdateDisplay();
                 };
-                btn.Content = track.title;
+                btn.RemoveClicked += (_a, _b) =>
+                {
+                    app.trackManager.RemoveFromQueue(_i);
+                    UpdateDisplay();
+                };
+                btn.Text = track.title;
                 Container.Children.Add(btn);
                 i++;
             }
@@ -85,19 +105,29 @@ namespace MicroPlayer
 
         void SetHistoryDisplay()
         {
-            EmptyLabel.Visibility = (app.trackManager.history.Count == 0 && app.trackManager.currentTrack == null) ? Visibility.Visible : Visibility.Collapsed;
-
             Container.Children.Clear();
 
             if (app.trackManager.currentTrack != null)
             {
-                Button currBtn = new Button() { BorderThickness = new Thickness(0), Height = 30, FontSize = 16, Margin = new Thickness(0, 5, 0, 5), Background = (Brush)FindResource("AccentBrush"), Foreground = (Brush)FindResource("FontBrush") };
-                currBtn.Click += (_a, _b) =>
+                TrackButton currBtn = new TrackButton() { Margin = new Thickness(0, 0, 0, 15), Background = (Brush)FindResource("AccentBrush"), ForegroundButton = true };
+                currBtn.Text = app.trackManager.currentTrack.title;
+                currBtn.PlayClicked += (_a, _b) =>
                 {
                     app.trackManager.audioManager.Restart();
+                    app.trackManager.Play();
                 };
-                currBtn.Content = app.trackManager.currentTrack.title;
+                currBtn.RemoveClicked += (_a, _b) =>
+                {
+                    app.trackManager.currentTrack = null;
+                    app.trackManager.NextTrack();
+                    UpdateDisplay();
+                };
                 Container.Children.Add(currBtn);
+            }
+
+            if (app.trackManager.history.Count == 0)
+            {
+                Container.Children.Add(new Label() { FontSize = 30, Foreground = (Brush)FindResource("FontBrush"), Content = "History Empty", HorizontalAlignment = HorizontalAlignment.Center });
             }
 
             int i = 1;
@@ -105,31 +135,46 @@ namespace MicroPlayer
             {
                 int _i = i;
 
-                Button btn = new Button() { BorderThickness = new Thickness(0), Height = 30, FontSize = 16, Margin = new Thickness(0, 5, 0, 5), Background = (Brush)FindResource("ForegroundBrush"), Foreground = (Brush)FindResource("FontBrush") };
-                btn.Click += (_a, _b) =>
+                Thickness margin = new Thickness(0, 5, 0, 5);
+                if (i == app.trackManager.queue.Count) margin = new Thickness(0, 5, 0, 0);
+
+                TrackButton btn = new TrackButton() { Margin = margin };
+                btn.PlayClicked += (_a, _b) =>
                 {
                     app.trackManager.JumpHistory(_i);
                     UpdateDisplay();
                 };
-                btn.Content = track.title;
+                btn.RemoveClicked += (_a, _b) =>
+                {
+                    app.trackManager.RemoveFromHistory(_i);
+                    UpdateDisplay();
+                };
+                btn.Text = track.title;
                 Container.Children.Add(btn);
                 i++;
             }
         }
-
-        private void PlayPrevious(object sender, RoutedEventArgs e)
+        private void LoadTrack(object sender, RoutedEventArgs e)
         {
-            app.trackManager.PreviousTrack();
-        }
+            OpenFileDialog openDialog = new OpenFileDialog()
+            {
+                Multiselect = true,
+                Filter =
+                    "Audio Files (*.wav;*.mp3)|*.wav;*.mp3|" +
+                    "All files (*.*)|*.*",
+                Title = "Open Tracks"
+            };
 
-        private void PlayCurrent(object sender, RoutedEventArgs e)
-        {
-            app.trackManager.audioManager.Restart();
-        }
+            var result = openDialog.ShowDialog();
+            if (result != null)
+            {
+                foreach (string path in openDialog.FileNames)
+                {
+                    app.trackManager.LoadTrack(path);
+                }
+            }
 
-        private void PlayNext(object sender, RoutedEventArgs e)
-        {
-            app.trackManager.NextTrack();
+            UpdateDisplay();
         }
 
         private void ShowQueue(object sender, RoutedEventArgs e)

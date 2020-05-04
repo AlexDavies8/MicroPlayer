@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "L+nqPnUPGxDmn8K+4vHev2KN546V0kRuxsUsFFKqWvxFqD20K3TNBZW3jBmsyqKeQeriaH7Gl8647wX/r99xgg==",
+  "success": true,
+  "projectFilePath": "D:\\Sync\\C#\\MicroPlayer\\MicroPlayer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\taglibsharp\\2.2.0\\taglibsharp.2.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="MicroPlayer.TrackButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MicroPlayer"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="280" Background="{DynamicResource ForegroundBrush}" ClipToBounds="True">
+    <Grid Background="Transparent" MouseEnter="ShowButtons" MouseLeave="HideButtons">
+        <Label Content="{Binding Text}" FontSize="16" Foreground="{DynamicResource FontBrush}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Grid x:Name="Buttons">
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE102;" BorderThickness="1" BorderBrush="{DynamicResource FontBrush}" Background="Transparent" Width="30px" Height="32px" FontSize="16" Foreground="{DynamicResource FontBrush}" Margin="0, 0, 30, 0" Click="Play_Button_Click"/>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE711;" BorderThickness="1" BorderBrush="{DynamicResource FontBrush}" Background="Transparent" Width="30px" Height="32px" FontSize="16" Foreground="{DynamicResource FontBrush}" Margin="0, 0, 0, 0" Click="Remove_Button_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

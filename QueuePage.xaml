@@ -9,12 +9,12 @@
       Title="QueuePage">
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="10, 60, 10, 10" ClipToBounds="True">
-            <StackPanel Name="Container" Margin="0, -10, 0, -10">
+        <local:CustomScrollViewer VerticalScrollBarVisibility="Hidden" Margin="10, 60, 10, 10" ClipToBounds="True" SpeedFactor="0.1">
+            <StackPanel Name="Container">
             </StackPanel>
-        </ScrollViewer>
-        <Label Name="EmptyLabel" FontSize="30" Foreground="{DynamicResource FontBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">Queue Empty</Label>
-        <Button FontFamily="Segoe MDL2 Assets" Content="&#xE823;" BorderThickness="0" FontSize="24" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource FontBrush}" Margin="10,10,155,250" Name="QueueButton" Click="ShowQueue"/>
-        <Button FontFamily="Segoe MDL2 Assets" Content="&#xE81C;" BorderThickness="0" FontSize="24" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource FontBrush}" Margin="155,10,10,250" Name="HistoryButton" Click="ShowHistory"/>
+        </local:CustomScrollViewer>
+        <Button FontFamily="Segoe MDL2 Assets" Content="&#xE823;" BorderThickness="0" FontSize="24" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource FontBrush}" Margin="10,10,180,250" Name="QueueButton" Click="ShowQueue"/>
+        <Button FontFamily="Segoe MDL2 Assets" Content="&#xE81C;" BorderThickness="0" FontSize="24" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource FontBrush}" Margin="130,10,60,250" Name="HistoryButton" Click="ShowHistory"/>
+        <Button FontFamily="Segoe MDL2 Assets" Content="&#xE8E5;" BorderThickness="0" FontSize="24" Background="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource FontBrush}" Margin="250,10,10,250" Name="AddButton" Click="LoadTrack"/>
     </Grid>
 </Page>

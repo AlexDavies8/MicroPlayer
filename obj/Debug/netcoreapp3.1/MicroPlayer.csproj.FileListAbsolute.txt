@@ -35,3 +35,8 @@ D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\resources\themes\Night.baml
 D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\resources\themes\Nior.baml
 D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\resources\themes\SunsetBeach.baml
 D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\resources\themes\Embers.baml
+D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\MicroPlayer.csproj.CoreCompileInputs.cache
+D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\MicroPlayer.genruntimeconfig.cache
+D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\TrackButton.g.cs
+D:\Sync\C#\MicroPlayer\obj\Debug\netcoreapp3.1\TrackButton.baml

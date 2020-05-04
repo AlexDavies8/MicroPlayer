@@ -13,20 +13,22 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
-        <Rectangle Fill="{DynamicResource ForegroundBrush}"/>
-        <Rectangle Fill="{DynamicResource FontBrush}">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/resources/playlist_mask_1.png"/>
-            </Rectangle.OpacityMask>
-        </Rectangle>
-        <Rectangle Fill="{DynamicResource AccentBrush}">
-            <Rectangle.OpacityMask>
-                <ImageBrush ImageSource="/resources/playlist_mask_2.png"/>
-            </Rectangle.OpacityMask>
-        </Rectangle>
+
+        <Grid x:Name="Icon">
+            <Rectangle Fill="{DynamicResource ForegroundBrush}"/>
+            <Rectangle Fill="{DynamicResource FontBrush}">
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/resources/playlist_mask_1.png"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Fill="{DynamicResource AccentBrush}">
+                <Rectangle.OpacityMask>
+                    <ImageBrush ImageSource="/resources/playlist_mask_2.png"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Grid>
         <Image Source="{Binding Path=Source}"/>
-        <TextBlock Text="{Binding Path=Text}" FontSize="24" TextWrapping="WrapWithOverflow" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-        <Button Background="Transparent" BorderThickness="0" Opacity="0.3"/>
+        <TextBlock Text="{Binding Path=Text}" FontSize="24" TextWrapping="WrapWithOverflow" TextAlignment="Center" VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PlaylistButton}}}"/>
+        <Button Name="button" Background="Transparent" BorderThickness="0" Opacity="0.3"/>
     </Grid>
 </UserControl>

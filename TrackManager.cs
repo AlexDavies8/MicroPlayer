@@ -12,8 +12,8 @@ namespace MicroPlayer
 
         public AudioManager audioManager;
         public bool playing { get { return audioManager.playing; } }
-        public Queue<Track> queue = new Queue<Track>();
-        public Stack<Track> history = new Stack<Track>();
+        public List<Track> queue = new List<Track>();
+        public List<Track> history = new List<Track>();
 
         public Action NextTrackCallback;
 
@@ -41,8 +41,9 @@ namespace MicroPlayer
         {
             for (int i = 0; i < count; i++)
             {
-                history.Push(currentTrack);
-                currentTrack = queue.Dequeue();
+                history.Add(currentTrack);
+                currentTrack = queue[0];
+                queue.RemoveAt(0);
             }
 
             audioManager.PlayTrack(currentTrack.path);
@@ -50,16 +51,22 @@ namespace MicroPlayer
 
         public void JumpHistory(int count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                queue.Enqueue(currentTrack);
-                currentTrack = history.Pop();
-            }
+            currentTrack = history[history.Count - count];
+            history.RemoveAt(history.Count - count);
 
             audioManager.PlayTrack(currentTrack.path);
         }
+        public void RemoveFromQueue(int depth)
+        {
+            queue.RemoveAt(depth - 1);
+        }
 
-        public void LoadTrack(string path)
+        public void RemoveFromHistory(int depth)
+        {
+            history.RemoveAt(history.Count - depth);
+        }
+
+        public Track GetTrackFromPath(string path)
         {
             Track track = new Track();
 
@@ -86,12 +93,19 @@ namespace MicroPlayer
                 }
             }
 
+            return track;
+        }
+
+        public void LoadTrack(string path)
+        {
+            Track track = GetTrackFromPath(path);
+
             if (track.title == "" || track.title == null)
             {
                 track.title = Path.GetFileNameWithoutExtension(track.path);
             }
 
-            queue.Enqueue(track);
+            queue.Add(track);
             if (currentTrack == null) NextTrack();
         }
 
@@ -105,8 +119,9 @@ namespace MicroPlayer
 
             if (history.Count == 0) return;
 
-            queue.Enqueue(currentTrack);
-            currentTrack = history.Pop();
+            queue.Add(currentTrack);
+            currentTrack = history[history.Count - 1];
+            history.RemoveAt(history.Count - 1);
             audioManager.PlayTrack(currentTrack.path);
         }
 
@@ -114,8 +129,9 @@ namespace MicroPlayer
         {
             if (queue.Count == 0) return;
 
-            if (currentTrack != null) history.Push(currentTrack);
-            currentTrack = queue.Dequeue();
+            if (currentTrack != null) history.Add(currentTrack);
+            currentTrack = queue[0];
+            queue.RemoveAt(0);
             audioManager.PlayTrack(currentTrack.path);
         }
 
